@@ -1,4 +1,4 @@
-package org.unitech.eurekaserver.Config;
+package org.unitech.eurekaserver.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
