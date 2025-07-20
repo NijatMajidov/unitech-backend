@@ -1,13 +1,13 @@
-package org.unitech.unitechbackend;
+package org.unitech.apigateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UnitechBackendApplication {
+public class ApiGatewayApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(UnitechBackendApplication.class, args);
+        SpringApplication.run(ApiGatewayApplication.class, args);
     }
 
 }

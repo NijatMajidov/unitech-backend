@@ -1,10 +1,10 @@
-package org.unitech.unitechbackend;
+package org.unitech.eurekaserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UnitechBackendApplicationTests {
+class EurekaServerApplicationTests {
 
     @Test
     void contextLoads() {
