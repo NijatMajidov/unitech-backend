@@ -1,4 +1,4 @@
-package org.unitech.apigateway.util;
+package org.unitech.apigateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
