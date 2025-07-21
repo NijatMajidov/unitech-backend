@@ -1,0 +1,69 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 2000ms
+
+  cloud:
+    gateway:
+      routes:
+        - id: auth-service
+          uri: lb://ms-auth
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - StripPrefix=1
+
+        - id: account-service
+          uri: lb://ms-account
+          predicates:
+            - Path=/api/accounts/**
+          filters:
+            - StripPrefix=1
+            - name: AuthFilter
+
+        - id: transfer-service
+          uri: lb://ms-transfer
+          predicates:
+            - Path=/api/transfers/**
+          filters:
+            - StripPrefix=1
+            - name: AuthFilter
+
+        - id: currency-service
+          uri: lb://ms-currency
+          predicates:
+            - Path=/api/currency/**
+          filters:
+            - StripPrefix=1
+
+        - id: bff-service
+          uri: lb://ms-bff
+          predicates:
+            - Path=/api/dashboard/**
+          filters:
+            - StripPrefix=1
+            - name: AuthFilter
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+jwt:
+  secret: z1vY0wDdS6O0nXBjMRwWTwFjM0Hg7BPK3DJ5rZL84Sk=
+  expiration: 86400000
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.unitech.apigateway: DEBUG
