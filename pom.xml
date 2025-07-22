@@ -11,6 +11,7 @@
     <groupId>org.unitech</groupId>
     <artifactId>unitech-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <name>unitech-backend</name>
     <description>unitech-backend</description>
     <url/>
@@ -20,6 +21,9 @@
     <developers>
         <developer/>
     </developers>
+    <modules>
+        <module>ms-currency</module>
+    </modules>
     <scm>
         <connection/>
         <developerConnection/>
