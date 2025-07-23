@@ -1,4 +1,4 @@
-package org.unitech.mstransfer;
+package org.unitech.mstransfer.servicetests;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
