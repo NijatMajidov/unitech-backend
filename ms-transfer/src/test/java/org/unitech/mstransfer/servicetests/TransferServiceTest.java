@@ -1,4 +1,4 @@
-package org.unitech.mstransfer;
+package org.unitech.mstransfer.servicetests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,6 @@ import org.unitech.mstransfer.service.TransferService;
 import org.unitech.service.CurrencyService;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
