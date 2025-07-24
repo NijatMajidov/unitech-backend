@@ -1,4 +1,4 @@
-package org.unitech.mstransfer.domain.repository;
+package org.unitech.mstransfer.domain.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,7 +10,7 @@ import java.awt.print.Pageable;
 import java.util.List;
 
 @Repository
-public interface TransferRepository extends JpaRepository<Transfer, Long> {
+public interface TransferDao extends JpaRepository<Transfer, Long> {
 
     @Query("select t from Transfer t where t.fromAccountId = :accountId or t.toAccountId = :accountId")
     List<Transfer> getTransferByAccountId(@Param("accountId") Long accountId);
