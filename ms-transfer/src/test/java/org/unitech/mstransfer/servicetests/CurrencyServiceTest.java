@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.*;
 import org.unitech.mstransfer.client.CurrencyClient;
 import org.unitech.mstransfer.model.dto.response.CurrencyResponse;
-import org.unitech.service.CurrencyService;
+import org.unitech.mstransfer.service.CurrencyService;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -29,7 +29,7 @@ public class CurrencyServiceTest {
 
         when(currencyClient.getExchangeRate("USD", "EUR")).thenReturn(mockResponse);
 
-        org.unitech.dto.CurrencyResponse result = currencyService.getExchangeRate("USD", "EUR");
+       CurrencyResponse result = currencyService.getExchangeRate("USD", "EUR");
 
         assertNotNull(result);
         assertEquals("USD", result.getFrom());
