@@ -4,15 +4,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.unitech.msaccount.service.AccountService;
 import org.unitech.mstransfer.domain.entity.Transfer;
-import org.unitech.mstransfer.domain.repo.TransferDao;
+import org.unitech.mstransfer.domain.repository.TransferRepository;
 import org.unitech.mstransfer.mapper.TransferMapper;
 import org.unitech.mstransfer.model.dto.request.TransferRequest;
 import org.unitech.mstransfer.model.dto.response.AccountResponse;
 import org.unitech.mstransfer.model.dto.response.CurrencyResponse;
+import org.unitech.mstransfer.service.AccountService;
+import org.unitech.mstransfer.service.CurrencyService;
 import org.unitech.mstransfer.service.TransferService;
-import org.unitech.service.CurrencyService;
 
 import java.math.BigDecimal;
 
@@ -28,7 +28,7 @@ class TransferServiceTest {
     @Mock
     private TransferMapper transferMapper;
     @Mock
-    private TransferDao transferDao;
+    private TransferRepository transferRepository;
     @Mock
     private RabbitTemplate rabbitTemplate;
 
@@ -54,7 +54,7 @@ class TransferServiceTest {
         when(accountService.getAccountById(2L)).thenReturn(toAccount);
         when(currencyService.getExchangeRate("USD", "EUR")).thenReturn(currencyResponse);
         when(transferMapper.toEntity(request)).thenReturn(mockTransfer);
-        when(transferDao.save(any(Transfer.class))).thenReturn(mockTransfer);
+        when(transferRepository.save(any(Transfer.class))).thenReturn(mockTransfer);
         when(transferMapper.toResponse(mockTransfer)).thenReturn(any());
 
         assertDoesNotThrow(() -> transferService.createTransfer(request));
