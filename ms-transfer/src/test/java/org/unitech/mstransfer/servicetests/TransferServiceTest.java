@@ -10,6 +10,7 @@ import org.unitech.mstransfer.mapper.TransferMapper;
 import org.unitech.mstransfer.model.dto.request.TransferRequest;
 import org.unitech.mstransfer.model.dto.response.AccountResponse;
 import org.unitech.mstransfer.model.dto.response.CurrencyResponse;
+import org.unitech.mstransfer.model.dto.response.TransferResponse;
 import org.unitech.mstransfer.service.AccountService;
 import org.unitech.mstransfer.service.CurrencyService;
 import org.unitech.mstransfer.service.TransferService;
@@ -39,32 +40,51 @@ class TransferServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
     }
+
     @Test
     void createTransfer_shouldReturnResponse_whenSuccessful() {
-        TransferRequest request = new TransferRequest(1L, 2L, new BigDecimal("100"),"Borc");
+
+        TransferRequest request = new TransferRequest(1L, 2L, new BigDecimal("100"), "Borc");
+
 
         AccountResponse fromAccount = AccountResponse.builder()
                 .id(1L)
                 .userId(1L)
                 .balance(new BigDecimal("500"))
-                .accountStatus("ACTIVE").build();
+                .accountStatus("ACTIVE")
+                .build();
 
         AccountResponse toAccount = AccountResponse.builder()
                 .id(2L)
                 .userId(2L)
                 .balance(new BigDecimal("200"))
-                .accountStatus("ACTIVE").build();
+                .accountStatus("ACTIVE")
+                .build();
 
         CurrencyResponse currencyResponse = new CurrencyResponse("USD", "EUR", new BigDecimal("0.9"));
+
         Transfer mockTransfer = new Transfer();
         mockTransfer.setId(1L);
+        mockTransfer.setFromAccountId(1L);
+        mockTransfer.setToAccountId(2L);
+        mockTransfer.setAmount(new BigDecimal("100"));
+        mockTransfer.setDescription("Borc");
+
+        TransferResponse expectedResponse = TransferResponse.builder()
+                .id(1L)
+                .fromAccountId(1L)
+                .toAccountId(2L)
+                .amount(new BigDecimal("100"))
+                .description("Borc")
+                .build();
+
 
         when(accountService.getAccountById(1L)).thenReturn(fromAccount);
         when(accountService.getAccountById(2L)).thenReturn(toAccount);
         when(currencyService.getExchangeRate("USD", "EUR")).thenReturn(currencyResponse);
         when(transferMapper.toEntity(request)).thenReturn(mockTransfer);
         when(transferRepository.save(any(Transfer.class))).thenReturn(mockTransfer);
-        when(transferMapper.toResponse(mockTransfer)).thenReturn(any());
+        when(transferMapper.toResponse(mockTransfer)).thenReturn(expectedResponse);
 
         assertDoesNotThrow(() -> transferService.createTransfer(request));
 
