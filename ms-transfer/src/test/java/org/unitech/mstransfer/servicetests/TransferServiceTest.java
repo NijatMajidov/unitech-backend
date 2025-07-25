@@ -41,10 +41,19 @@ class TransferServiceTest {
     }
     @Test
     void createTransfer_shouldReturnResponse_whenSuccessful() {
-        TransferRequest request = new TransferRequest(1L, 2L, new BigDecimal("100"));
+        TransferRequest request = new TransferRequest(1L, 2L, new BigDecimal("100"),"Borc");
 
-        AccountResponse fromAccount = new AccountResponse(1L, 1L, "USD", new BigDecimal("500"), "ACTIVE");
-        AccountResponse toAccount = new AccountResponse(2L, 2L, "EUR", new BigDecimal("200"), "ACTIVE");
+        AccountResponse fromAccount = AccountResponse.builder()
+                .id(1L)
+                .userId(1L)
+                .balance(new BigDecimal("500"))
+                .accountStatus("ACTIVE").build();
+
+        AccountResponse toAccount = AccountResponse.builder()
+                .id(2L)
+                .userId(2L)
+                .balance(new BigDecimal("200"))
+                .accountStatus("ACTIVE").build();
 
         CurrencyResponse currencyResponse = new CurrencyResponse("USD", "EUR", new BigDecimal("0.9"));
         Transfer mockTransfer = new Transfer();
